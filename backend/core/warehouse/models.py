@@ -11,7 +11,16 @@ class Supplier(models.Model):
         return self.name
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=50)
+    description = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Product(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     name = models.CharField(max_length=50)
     description = models.TextField(null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -41,7 +50,7 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     stage = models.CharField(max_length=50, choices=STAGE_CHOICES, default='Draft')
-    total = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return f'Order {self.id}'

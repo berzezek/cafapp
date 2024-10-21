@@ -45,7 +45,6 @@ INSTALLED_APPS = [
 
     # my-apps
     'warehouse',
-    'auth'
 ]
 
 MIDDLEWARE = [
